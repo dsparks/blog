@@ -45,6 +45,17 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
     </item>
     
     <item>
+      <title>My first RMarkdown post</title>
+      <link>/posts/my-first-rmarkdown-post/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/my-first-rmarkdown-post/</guid>
+      <description>Here’s some code
+dim(iris)And here is some more text. And the obligatory UL: - One - B - 3
+r plot(1)</description>
+    </item>
+    
+    <item>
       <title>My first test post, part III</title>
       <link>/posts/my-first-test-post-part-iii/</link>
       <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
