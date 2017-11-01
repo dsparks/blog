@@ -2,18 +2,18 @@ theme = "hugo_theme_pickles"
 baseurl = "/"
 languageCode = "en-us"
 Title = "Sparks blog"
-# Copyright notice. This is displayer in the footer.
+# Copyright notice. This is displayed in the footer.
 copyright = "&copy; Copyright notice"
 
 [params]
   paginate = 10
   # Social accounts. Link to these accounts are displayed in the header and
   # footer
-  twitter = "Your Twitter username"
+  twitter = "dsparks"
   facebook = "Your Facebook username"
   instagram = "Your Instagram username"
   googleplus = "Your Google+ account URL" # https://plus.google.com/u/0/xxxxxx
-  github = "Your GitHub username"
+  github = "dsparks"
   gitlab = "Your GitLab username"
   npm = "Your npm username"
   codepen = "Your CodePen username"
@@ -28,14 +28,14 @@ copyright = "&copy; Copyright notice"
   # Disqus shortname
   disqus = ""
   # Google Analytics API key.
-  ga_api_key = "Your Google Analytics tracking id"
-  author = "Your Name"
-  authorwebsite = "example.com"
+  ga_api_key = "UA-3213316-17"
+  author = "dsparks"
+  authorwebsite = "dsparks.wordpress.com"
   avatar = "/path/to/avatar"
   contact = "Your contact link (ex. mailto:foo@example.com)"
   bio = "Your short bio"
   # Short subtitle/tagline. This is displayed in the header.
-  subtitle = "Short subtitle"
+  subtitle = "Too much to say."
   # Logo image. This is displayed ogp image.
   logo = "/path/to/logo"
   favicon = "/path/to/favicon"
