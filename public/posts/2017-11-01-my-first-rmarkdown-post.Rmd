@@ -14,10 +14,16 @@ dim(iris)
 ```
 
 And here is some more text. And the obligatory UL:
- - One
- - B
- - 3
+- One
+- B
+- 3
  
  ```{r}
  plot(1)
  ```
+ 
+ And here's an updated part of the post:
+ ```{r}
+head(cars)
+with(cars, plot(speed, dist))
+````
