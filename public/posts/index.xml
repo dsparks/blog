@@ -51,7 +51,7 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
       
       <guid>/posts/my-first-rmarkdown-post/</guid>
       <description>Here’s some code
-dim(iris)And here is some more text. And the obligatory UL: - One - B - 3
+dim(iris)## [1] 150 5And here is some more text. And the obligatory UL: - One - B - 3
 r plot(1)</description>
     </item>
     

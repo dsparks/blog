@@ -9,7 +9,7 @@ tags: []
 
 Here’s some code
 
-```r
+```{r}
 dim(iris)
 ```
 
@@ -18,6 +18,6 @@ And here is some more text. And the obligatory UL:
  - B
  - 3
  
- ```r
+ ```{r}
  plot(1)
  ```
