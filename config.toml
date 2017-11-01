@@ -10,23 +10,23 @@ copyright = "&copy; Copyright notice"
   # Social accounts. Link to these accounts are displayed in the header and
   # footer
   twitter = "dsparks"
-  facebook = "Your Facebook username"
-  instagram = "Your Instagram username"
-  googleplus = "Your Google+ account URL" # https://plus.google.com/u/0/xxxxxx
+  #facebook = "Your Facebook username"
+  #instagram = "Your Instagram username"
+  #googleplus = "Your Google+ account URL" # https://plus.google.com/u/0/xxxxxx
   github = "dsparks"
-  gitlab = "Your GitLab username"
-  npm = "Your npm username"
-  codepen = "Your CodePen username"
-  dribbble = "Your Dribbble username"
-  fivehundredpx = "Your 500px username" # 500px
-  flickr = "Your Flickr username"
-  pinterest = "Your Pinterest username"
-  tumblr = "Your Tumblr username"
-  vimeo = "Your Vimeo username"
-  youtube = "Your YouTube username"
-  linkedin = "Your LinkedIn username"
+  #gitlab = "Your GitLab username"
+  #npm = "Your npm username"
+  #codepen = "Your CodePen username"
+  #dribbble = "Your Dribbble username"
+  #fivehundredpx = "Your 500px username" # 500px
+  #flickr = "Your Flickr username"
+  #pinterest = "Your Pinterest username"
+  #tumblr = "Your Tumblr username"
+  #vimeo = "Your Vimeo username"
+  #youtube = "Your YouTube username"
+  #linkedin = "Your LinkedIn username"
   # Disqus shortname
-  disqus = ""
+  #disqus = ""
   # Google Analytics API key.
   ga_api_key = "UA-3213316-17"
   author = "dsparks"
