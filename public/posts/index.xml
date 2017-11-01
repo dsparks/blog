@@ -45,6 +45,16 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
     </item>
     
     <item>
+      <title>My first test post, part III</title>
+      <link>/posts/my-first-test-post-part-iii/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/my-first-test-post-part-iii/</guid>
+      <description>Here is some text. It includes words, and an ordered list:
+ List item Another Three Is this indenting correctly?  And that&amp;rsquo;s the end of the list.</description>
+    </item>
+    
+    <item>
       <title>(Hu)go Template Primer</title>
       <link>/posts/goisforlovers/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
