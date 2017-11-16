@@ -16,7 +16,7 @@ tags: []
 <p>First, load all of the packages we need:</p>
 <pre class="r"><code>toLoad &lt;- c(&quot;stringr&quot;, &quot;lubridate&quot;, &quot;tidyr&quot;, &quot;dplyr&quot;, &quot;Hmisc&quot;, &quot;ggridges&quot;,
             &quot;ggrepel&quot;, &quot;ggraph&quot;, &quot;forcats&quot;, &quot;readr&quot;, &quot;rvest&quot;, &quot;ggplot2&quot;,
-            &quot;igraph&quot;, &quot;viridis&quot;, &quot;zoo&quot;, &quot;kableExtra&quot;)
+            &quot;igraph&quot;, &quot;viridis&quot;, &quot;zoo&quot;)
 lapply(toLoad, library, character.only = TRUE)
 
 # (Package loading messages are suppressed)</code></pre>
@@ -48,96 +48,178 @@ Refs &lt;- Refs %&gt;%
 
 Refs %&gt;%
   sample_n(20) %&gt;%
-  knitr::kable() %&gt;%
-  row_spec(1, bold = TRUE)
-#     Currently generic markdown table using pandoc is not supported.</code></pre>
+  knitr::kable()</code></pre>
 <table>
 <thead>
-<tr class="header">
-<th align="left">fromVerse</th>
-<th align="left">toVerse</th>
+<tr>
+<th style="text-align:left;">
+fromVerse
+</th>
+<th style="text-align:left;">
+toVerse
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Mark.5.29</td>
-<td align="left">1Kgs.8.37</td>
+<tr>
+<td style="text-align:left;">
+Rom.4.2
+</td>
+<td style="text-align:left;">
+Gal.6.13-Gal.6.14
+</td>
 </tr>
-<tr class="even">
-<td align="left">1Kgs.11.38</td>
-<td align="left">2Sam.7.16</td>
+<tr>
+<td style="text-align:left;">
+Ezek.38.22
+</td>
+<td style="text-align:left;">
+Ezek.5.17
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Luke.18.22</td>
-<td align="left">Acts.2.44-Acts.2.45</td>
+<tr>
+<td style="text-align:left;">
+Ezek.37.23
+</td>
+<td style="text-align:left;">
+Ezek.36.31
+</td>
 </tr>
-<tr class="even">
-<td align="left">Zeph.3.2</td>
-<td align="left">Isa.43.22</td>
+<tr>
+<td style="text-align:left;">
+1Kgs.7.39
+</td>
+<td style="text-align:left;">
+2Chr.4.6
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2Chr.35.21</td>
-<td align="left">John.2.4</td>
+<tr>
+<td style="text-align:left;">
+Gal.6.3
+</td>
+<td style="text-align:left;">
+Rom.12.3
+</td>
 </tr>
-<tr class="even">
-<td align="left">Job.5.5</td>
-<td align="left">Deut.28.33</td>
+<tr>
+<td style="text-align:left;">
+Ps.104.25
+</td>
+<td style="text-align:left;">
+Ps.95.4-Ps.95.5
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Deut.22.19</td>
-<td align="left">Matt.19.8-Matt.19.9</td>
+<tr>
+<td style="text-align:left;">
+2Cor.5.9
+</td>
+<td style="text-align:left;">
+2Pet.1.10-2Pet.1.11
+</td>
 </tr>
-<tr class="even">
-<td align="left">Deut.5.14</td>
-<td align="left">Neh.13.21</td>
+<tr>
+<td style="text-align:left;">
+Job.38.24
+</td>
+<td style="text-align:left;">
+Jonah.4.8
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Matt.2.3</td>
-<td align="left">John.11.47-John.11.48</td>
+<tr>
+<td style="text-align:left;">
+1Kgs.18.12
+</td>
+<td style="text-align:left;">
+Dan.2.5-Dan.2.13
+</td>
 </tr>
-<tr class="even">
-<td align="left">Job.31.6</td>
-<td align="left">Ps.1.6</td>
+<tr>
+<td style="text-align:left;">
+Jer.10.10
+</td>
+<td style="text-align:left;">
+1Thess.1.9
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Hab.2.5</td>
-<td align="left">Jer.25.9</td>
+<tr>
+<td style="text-align:left;">
+Ps.9.12
+</td>
+<td style="text-align:left;">
+Exod.3.7
+</td>
 </tr>
-<tr class="even">
-<td align="left">Lev.9.15</td>
-<td align="left">Isa.53.10</td>
+<tr>
+<td style="text-align:left;">
+Exod.9.5
+</td>
+<td style="text-align:left;">
+Eccl.3.1-Eccl.3.11
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Job.40.2</td>
-<td align="left">Job.7.12</td>
+<tr>
+<td style="text-align:left;">
+Job.24.23
+</td>
+<td style="text-align:left;">
+Prov.25.21-Prov.25.23
+</td>
 </tr>
-<tr class="even">
-<td align="left">Luke.19.41</td>
-<td align="left">Jer.13.17</td>
+<tr>
+<td style="text-align:left;">
+Esth.8.10
+</td>
+<td style="text-align:left;">
+1Kgs.4.28
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Rev.4.3</td>
-<td align="left">Rev.21.11</td>
+<tr>
+<td style="text-align:left;">
+1Cor.15.15
+</td>
+<td style="text-align:left;">
+Acts.4.10
+</td>
 </tr>
-<tr class="even">
-<td align="left">Luke.2.4</td>
-<td align="left">Mic.5.2</td>
+<tr>
+<td style="text-align:left;">
+Acts.15.24
+</td>
+<td style="text-align:left;">
+Jer.23.16
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Ps.103.11</td>
-<td align="left">Ps.36.5</td>
+<tr>
+<td style="text-align:left;">
+1John.2.7
+</td>
+<td style="text-align:left;">
+Acts.17.19
+</td>
 </tr>
-<tr class="even">
-<td align="left">1Sam.17.4</td>
-<td align="left">1Sam.27.4</td>
+<tr>
+<td style="text-align:left;">
+2Sam.2.23
+</td>
+<td style="text-align:left;">
+2Sam.20.10
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Luke.2.19</td>
-<td align="left">Gen.37.11</td>
+<tr>
+<td style="text-align:left;">
+Matt.17.18
+</td>
+<td style="text-align:left;">
+Mark.5.8
+</td>
 </tr>
-<tr class="even">
-<td align="left">John.1.42</td>
-<td align="left">John.2.24-John.2.25</td>
+<tr>
+<td style="text-align:left;">
+Neh.8.6
+</td>
+<td style="text-align:left;">
+Exod.4.31
+</td>
 </tr>
 </tbody>
 </table>

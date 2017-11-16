@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       comment = "#    ",
                       cache = TRUE,
                       dev = "CairoPNG")
+options(knitr.table.format = "html") 
 ```
 
 ## Here is some preamble
@@ -27,7 +28,7 @@ First, load all of the packages we need:
 ```{r load_packages, collapse = TRUE, warning = FALSE, error = FALSE, message=FALSE, results = "hide"}
 toLoad <- c("stringr", "lubridate", "tidyr", "dplyr", "Hmisc", "ggridges",
             "ggrepel", "ggraph", "forcats", "readr", "rvest", "ggplot2",
-            "igraph", "viridis", "zoo", "kableExtra")
+            "igraph", "viridis", "zoo")
 lapply(toLoad, library, character.only = TRUE)
 
 # (Package loading messages are suppressed)
@@ -50,8 +51,7 @@ Refs <- Refs %>%
 
 Refs %>%
   sample_n(20) %>%
-  knitr::kable() %>%
-  row_spec(1, bold = TRUE)
+  knitr::kable()
 
 ```
 
