@@ -50,7 +50,7 @@ Refs <- Refs %>%
   dplyr::select(fromVerse, toVerse)
 
 Refs %>%
-  sample_n(20) %>%
+  sample_n(10) %>%
   knitr::kable()
 
 ```
