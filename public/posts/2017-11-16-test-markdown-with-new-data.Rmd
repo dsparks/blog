@@ -14,11 +14,6 @@ knitr::opts_chunk$set(echo = TRUE,
                       comment = "#    ",
                       cache = TRUE,
                       dev = "CairoPNG")
-# Load init.R file, which includes some local references and sets the wd.
-source(path.expand("~/init.R"), local = TRUE)
-# Set wd to project location
-setwd(gsub("Celtics", "538/Bible_cross_references", getwd()))
-options(tz="America/New_York")
 ```
 
 ## Here is some preamble
@@ -35,7 +30,7 @@ toLoad <- c("stringr", "lubridate", "tidyr", "dplyr", "Hmisc", "ggridges",
             "igraph", "viridis", "zoo")
 lapply(toLoad, library, character.only = TRUE)
 
-# (Package loading messages are suppressed in this document)
+# (Package loading messages are suppressed)
 
 ```
 
@@ -44,9 +39,7 @@ lapply(toLoad, library, character.only = TRUE)
 This data comes from [website]. Describe it here.
 
 ```{r load_data, collapse = TRUE, results='asis'}
-source(path.expand("~/init.R"), local = TRUE)
-# Set wd to project location
-setwd(gsub("Celtics", "538/Bible_cross_references", getwd()))
+setwd(gsub("content/posts", "data", getwd()))
 Refs <- read_tsv("cross_references.txt")
 
 # Rename columns to omit spaces

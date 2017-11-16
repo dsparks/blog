@@ -81,16 +81,12 @@
             &quot;igraph&quot;, &quot;viridis&quot;, &quot;zoo&quot;)
 lapply(toLoad, library, character.only = TRUE)
 
-# (Package loading messages are suppressed in this document)</code></pre>
+# (Package loading messages are suppressed)</code></pre>
 </div>
 <div id="load-data" class="section level2">
 <h2>Load data</h2>
 <p>This data comes from [website]. Describe it here.</p>
-<pre class="r"><code>source(path.expand(&quot;~/init.R&quot;), local = TRUE)</code></pre>
-<p>wd is set to C:/Dropbox/Celtics</p>
-<p>R is intialized. Let’s go Celtics!</p>
-<pre class="r"><code># Set wd to project location
-setwd(gsub(&quot;Celtics&quot;, &quot;538/Bible_cross_references&quot;, getwd()))
+<pre class="r"><code>setwd(gsub(&quot;content/posts&quot;, &quot;data&quot;, getwd()))
 Refs &lt;- read_tsv(&quot;cross_references.txt&quot;)
 #     Parsed with column specification:
 #     cols(
@@ -124,84 +120,84 @@ Refs %&gt;%
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">1Thess.1.3</td>
-<td align="left">Rom.15.13</td>
+<td align="left">John.2.2</td>
+<td align="left">Matt.10.40-Matt.10.42</td>
 </tr>
 <tr class="even">
-<td align="left">Rom.4.20</td>
-<td align="left">2Kgs.7.19</td>
+<td align="left">Ps.45.1</td>
+<td align="left">Matt.27.37</td>
 </tr>
 <tr class="odd">
-<td align="left">Lev.27.28</td>
-<td align="left">Judg.11.30-Judg.11.31</td>
+<td align="left">Lev.6.7</td>
+<td align="left">Lev.4.31</td>
 </tr>
 <tr class="even">
-<td align="left">Heb.11.9</td>
-<td align="left">Gen.18.6</td>
+<td align="left">Prov.12.23</td>
+<td align="left">Prov.11.13</td>
 </tr>
 <tr class="odd">
-<td align="left">Job.15.4</td>
-<td align="left">Luke.18.1</td>
+<td align="left">Zeph.3.12</td>
+<td align="left">Rom.15.12</td>
 </tr>
 <tr class="even">
-<td align="left">1Sam.12.22</td>
-<td align="left">Jer.14.21</td>
+<td align="left">Acts.15.25</td>
+<td align="left">Rom.16.12</td>
 </tr>
 <tr class="odd">
-<td align="left">2Tim.1.3</td>
-<td align="left">2Tim.3.15</td>
+<td align="left">Gal.1.1</td>
+<td align="left">Acts.9.15-Acts.9.16</td>
 </tr>
 <tr class="even">
-<td align="left">Acts.23.19</td>
-<td align="left">Esth.7.2</td>
+<td align="left">Gen.49.24</td>
+<td align="left">Isa.28.16</td>
 </tr>
 <tr class="odd">
-<td align="left">Exod.35.25</td>
-<td align="left">Rom.16.6</td>
+<td align="left">Jer.1.13</td>
+<td align="left">Zech.4.2</td>
 </tr>
 <tr class="even">
-<td align="left">Esth.7.9</td>
-<td align="left">Ps.37.35-Ps.37.36</td>
+<td align="left">Esth.8.15</td>
+<td align="left">Esth.6.11</td>
 </tr>
 <tr class="odd">
-<td align="left">Ezra.7.24</td>
-<td align="left">Ezra.4.20</td>
+<td align="left">1Chr.7.23</td>
+<td align="left">2Sam.23.5</td>
 </tr>
 <tr class="even">
-<td align="left">Mark.8.32</td>
-<td align="left">Matt.16.22</td>
+<td align="left">Jer.19.15</td>
+<td align="left">Acts.7.51-Acts.7.52</td>
 </tr>
 <tr class="odd">
-<td align="left">Hab.3.14</td>
-<td align="left">Exod.12.12-Exod.12.13</td>
+<td align="left">Lev.4.31</td>
+<td align="left">Lev.8.21</td>
 </tr>
 <tr class="even">
-<td align="left">Ezek.9.7</td>
-<td align="left">Lam.2.4-Lam.2.7</td>
+<td align="left">Jer.17.3</td>
+<td align="left">Mic.1.5-Mic.1.7</td>
 </tr>
 <tr class="odd">
-<td align="left">Num.11.11</td>
-<td align="left">Ps.143.2</td>
+<td align="left">Jonah.3.7</td>
+<td align="left">Joel.1.18</td>
 </tr>
 <tr class="even">
-<td align="left">Ps.87.5</td>
-<td align="left">1Pet.1.23-1Pet.1.24</td>
+<td align="left">Ps.69.1</td>
+<td align="left">Isa.28.17</td>
 </tr>
 <tr class="odd">
-<td align="left">Song.6.13</td>
-<td align="left">Gen.49.10</td>
+<td align="left">Mark.7.22</td>
+<td align="left">1Pet.5.5</td>
 </tr>
 <tr class="even">
-<td align="left">Jer.20.9</td>
-<td align="left">John.4.2-John.4.3</td>
+<td align="left">2Kgs.18.4</td>
+<td align="left">1Kgs.15.12-1Kgs.15.14</td>
 </tr>
 <tr class="odd">
-<td align="left">Gen.39.2</td>
-<td align="left">Ps.46.7</td>
+<td align="left">Gen.43.11</td>
+<td align="left">1Kgs.10.25</td>
 </tr>
 <tr class="even">
-<td align="left">Exod.18.16</td>
-<td align="left">Deut.17.8-Deut.17.12</td>
+<td align="left">Ezek.43.5</td>
+<td align="left">Ezek.3.12-Ezek.3.14</td>
 </tr>
 </tbody>
 </table>
