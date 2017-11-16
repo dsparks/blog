@@ -1,0 +1,147 @@
+---
+title: Test markdown with new data
+author: dsparks
+date: '2017-11-16'
+slug: test-markdown-with-new-data
+categories: []
+tags: []
+---
+
+
+
+<div id="here-is-some-preamble" class="section level2">
+<h2>Here is some preamble</h2>
+<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
+<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+<p>First, load all of the packages we need:</p>
+<pre class="r"><code>toLoad &lt;- c(&quot;stringr&quot;, &quot;lubridate&quot;, &quot;tidyr&quot;, &quot;dplyr&quot;, &quot;Hmisc&quot;, &quot;ggridges&quot;,
+            &quot;ggrepel&quot;, &quot;ggraph&quot;, &quot;forcats&quot;, &quot;readr&quot;, &quot;rvest&quot;, &quot;ggplot2&quot;,
+            &quot;igraph&quot;, &quot;viridis&quot;, &quot;zoo&quot;)
+lapply(toLoad, library, character.only = TRUE)
+
+# (Package loading messages are suppressed in this document)</code></pre>
+</div>
+<div id="load-data" class="section level2">
+<h2>Load data</h2>
+<p>This data comes from [website]. Describe it here.</p>
+<pre class="r"><code>source(path.expand(&quot;~/init.R&quot;), local = TRUE)</code></pre>
+<p>wd is set to C:/Dropbox/Celtics</p>
+<p>R is intialized. Let’s go Celtics!</p>
+<pre class="r"><code># Set wd to project location
+setwd(gsub(&quot;Celtics&quot;, &quot;538/Bible_cross_references&quot;, getwd()))
+Refs &lt;- read_tsv(&quot;cross_references.txt&quot;)
+#     Parsed with column specification:
+#     cols(
+#       `From Verse` = col_character(),
+#       `To Verse` = col_character(),
+#       Votes = col_integer(),
+#       `#www.openbible.info CC-BY 2017-09-11` = col_character()
+#     )
+#     Warning in rbind(names(probs), probs_f): number of columns of result is not
+#     a multiple of vector length (arg 1)
+#     Warning: 344789 parsing failures.
+#     row # A tibble: 5 x 5 col     row   col  expected    actual                   file expected   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;                  &lt;chr&gt; actual 1     1  &lt;NA&gt; 4 columns 3 columns &#39;cross_references.txt&#39; file 2     2  &lt;NA&gt; 4 columns 3 columns &#39;cross_references.txt&#39; row 3     3  &lt;NA&gt; 4 columns 3 columns &#39;cross_references.txt&#39; col 4     4  &lt;NA&gt; 4 columns 3 columns &#39;cross_references.txt&#39; expected 5     5  &lt;NA&gt; 4 columns 3 columns &#39;cross_references.txt&#39;
+#     ... ................. ... ........................................................ ........ ........................................................ ...... ........................................................ .... ........................................................ ... ........................................................ ... ........................................................ ........ ........................................................
+#     See problems(...) for more details.
+
+# Rename columns to omit spaces
+Refs &lt;- Refs %&gt;%
+  dplyr::rename(fromVerse = `From Verse`,
+                toVerse = `To Verse`) %&gt;%
+  dplyr::select(fromVerse, toVerse)
+
+Refs %&gt;%
+  sample_n(20) %&gt;%
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">fromVerse</th>
+<th align="left">toVerse</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1Thess.1.3</td>
+<td align="left">Rom.15.13</td>
+</tr>
+<tr class="even">
+<td align="left">Rom.4.20</td>
+<td align="left">2Kgs.7.19</td>
+</tr>
+<tr class="odd">
+<td align="left">Lev.27.28</td>
+<td align="left">Judg.11.30-Judg.11.31</td>
+</tr>
+<tr class="even">
+<td align="left">Heb.11.9</td>
+<td align="left">Gen.18.6</td>
+</tr>
+<tr class="odd">
+<td align="left">Job.15.4</td>
+<td align="left">Luke.18.1</td>
+</tr>
+<tr class="even">
+<td align="left">1Sam.12.22</td>
+<td align="left">Jer.14.21</td>
+</tr>
+<tr class="odd">
+<td align="left">2Tim.1.3</td>
+<td align="left">2Tim.3.15</td>
+</tr>
+<tr class="even">
+<td align="left">Acts.23.19</td>
+<td align="left">Esth.7.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Exod.35.25</td>
+<td align="left">Rom.16.6</td>
+</tr>
+<tr class="even">
+<td align="left">Esth.7.9</td>
+<td align="left">Ps.37.35-Ps.37.36</td>
+</tr>
+<tr class="odd">
+<td align="left">Ezra.7.24</td>
+<td align="left">Ezra.4.20</td>
+</tr>
+<tr class="even">
+<td align="left">Mark.8.32</td>
+<td align="left">Matt.16.22</td>
+</tr>
+<tr class="odd">
+<td align="left">Hab.3.14</td>
+<td align="left">Exod.12.12-Exod.12.13</td>
+</tr>
+<tr class="even">
+<td align="left">Ezek.9.7</td>
+<td align="left">Lam.2.4-Lam.2.7</td>
+</tr>
+<tr class="odd">
+<td align="left">Num.11.11</td>
+<td align="left">Ps.143.2</td>
+</tr>
+<tr class="even">
+<td align="left">Ps.87.5</td>
+<td align="left">1Pet.1.23-1Pet.1.24</td>
+</tr>
+<tr class="odd">
+<td align="left">Song.6.13</td>
+<td align="left">Gen.49.10</td>
+</tr>
+<tr class="even">
+<td align="left">Jer.20.9</td>
+<td align="left">John.4.2-John.4.3</td>
+</tr>
+<tr class="odd">
+<td align="left">Gen.39.2</td>
+<td align="left">Ps.46.7</td>
+</tr>
+<tr class="even">
+<td align="left">Exod.18.16</td>
+<td align="left">Deut.17.8-Deut.17.12</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+</div>

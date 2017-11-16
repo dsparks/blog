@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>/posts/test-markdown-with-new-data/</loc>
+    <lastmod>2017-11-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/my-first-rmarkdown-post/</loc>
     <lastmod>2017-11-01T00:00:00+00:00</lastmod>
   </url>
