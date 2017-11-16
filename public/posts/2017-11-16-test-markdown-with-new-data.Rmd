@@ -37,7 +37,7 @@ lapply(toLoad, library, character.only = TRUE)
 
 ## Load data
 
-This data comes from [website]. Describe it here.
+This cross-reference data comes from [openbible.info](https://www.openbible.info/labs/cross-references/). Stephen Smith, who compiled the data, has produced a lot of really interesting visualizations -- I reccommend checking out [his blog](http://www.openbible.info/blog/).
 
 ```{r load_data, collapse = TRUE, results='asis'}
 setwd(gsub("content/posts", "data", getwd()))

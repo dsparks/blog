@@ -35,7 +35,7 @@ copyright = "&copy; Copyright notice"
   contact = "Your contact link (ex. mailto:foo@example.com)"
   bio = "Your short bio"
   # Short subtitle/tagline. This is displayed in the header.
-  subtitle = "Too much to say."
+  subtitle = "lagniappes"
   # Logo image. This is displayed ogp image.
   logo = "/path/to/logo"
   favicon = "/path/to/favicon"
