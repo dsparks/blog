@@ -1,7 +1,7 @@
 theme = "hugo_theme_pickles"
 baseurl = "/"
 languageCode = "en-us"
-Title = "Sparks blog"
+Title = "Notes"
 # Copyright notice. This is displayed in the footer.
 copyright = "&copy; Copyright notice"
 
