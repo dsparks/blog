@@ -35,9 +35,12 @@ lapply(toLoad, library, character.only = TRUE)
 
 ```
 
-## Load data
 
-This cross-reference data comes from [openbible.info](https://www.openbible.info/labs/cross-references/). Stephen Smith, who compiled the data, has produced a lot of really interesting visualizations -- I reccommend checking out [his blog](http://www.openbible.info/blog/).
+#### Load data
+
+This cross-reference data comes from [openbible.info](https://www.openbible.info/labs/cross-references/). Stephen Smith, who compiled the data, has produced a lot of really interesting visualizations -- I highly recommend checking out [his blog](http://www.openbible.info/blog/) -- so many interesting ideas, and lots of great data.
+
+Let's start by loading the data, and renaming the two key variables to omit spaces.
 
 ```{r load_data, collapse = TRUE, results='asis'}
 setwd(gsub("content/posts", "data", getwd()))
@@ -51,8 +54,209 @@ Refs <- Refs %>%
 
 Refs %>%
   sample_n(10) %>%
-  knitr::kable()
+  knitr::kable(caption = "A sample of the cross-reference data") %>%
+  kable_styling(bootstrap_options = "condensed", full_width = F, position = "left")
+```
+
+#### Deduce all unique verses
+This `Refs` `tibble` contains `r nrow(Refs)` cross-reference citations, but they are not all one-to-one; some references are to a short sequence of verses. The next section accomplishes the following:
+
+1. Since not every verse in the Bible is listed in our `Refs` data, we can attempt to deduce the entire list of chapter-verses in the Bible. It's entirely possible the resulting list is incomplete -- this code relies on the `Refs` data to include the _actual_ last verse of each chapter, which may not be the case.
+2. Use `expand.grid` to generate all possible book-chapter-verse combinations, and then filter out any chapter and verse numbers that are greater than the maxima we observe in `Refs`.
+3. The `allPossibleCombinations` `tibble` will be a good place to keep track of things as we progress.
+
+
+```{r unique_verses, collapse = TRUE, results='asis'}
+allVerses <- Refs %>%  # Split multi-verse citations
+  separate(toVerse, c("verse1", "verse2"), sep = "-") %>%
+  mutate(initialSequence = row_number(),
+         temp = fromVerse) %>%
+  separate(temp, c("Book", "Chapter", "Verse"), sep = "\\.")
+
+bookStart <- allVerses %>%  # Identify the first verse of each book
+  group_by(Book) %>%
+  dplyr::summarise(bookStart = min(initialSequence))%>%
+  ungroup()
+
+allVerses <- allVerses %>%
+  dplyr::select(fromVerse, verse1, verse2) %>%
+  gather(placeholder, verseName) %>%  # Make tall
+  dplyr::select(-placeholder) %>%
+  filter(!is.na(verseName)) %>%
+  mutate(temp = verseName) %>%
+  separate(temp, c("Book", "Chapter", "Verse"), sep = "\\.") %>%
+  distinct() %>%
+  mutate(Chapter = as.numeric(Chapter),
+         Verse = as.numeric(Verse))
+
+allPossibleCombinations <- with(allVerses,  # Every possible B:C:V combination
+                                expand.grid(Book = unique(Book),
+                                            Chapter = 1:max(Chapter),
+                                            Verse = 1:max(Verse))) %>%
+  dplyr::as_data_frame()
+
+maxChapterByBook <- allVerses %>%  # Observed final chapter of each book
+  group_by(Book) %>%               # (this is probably correct)
+  dplyr::summarise(maxChapter = max(Chapter)) %>%
+  ungroup()
+
+maxVerseByChapter <- allVerses %>%  # Observed final verse of each chapter
+  group_by(Book, Chapter) %>%       # (less confident that this is correct)
+  dplyr::summarise(maxVerse = max(Verse)) %>%
+  ungroup()
+
+allPossibleCombinations <- allPossibleCombinations %>%
+  left_join(maxChapterByBook) %>%
+  left_join(maxVerseByChapter) %>%
+  left_join(bookStart)
+
+allPossibleCombinations <- allPossibleCombinations %>%
+  filter(Chapter <= maxChapter,  # Drop any verses/chapters greater than
+         Verse <= maxVerse)      # actually observed by chapter/book
+
+allPossibleCombinations <- allPossibleCombinations %>%  # Add identifiers
+  arrange(bookStart, Chapter, Verse) %>%
+  mutate(VID = row_number(),
+         BCS = paste(Book, Chapter, Verse, sep = ".")) %>%
+  dplyr::select(VID, BCS, Book, Chapter, Verse)
+
+allPossibleCombinations %>%
+  sample_n(10) %>%
+  knitr::kable(caption = "A sample of all Book/Chapter/Verses, with numeric and string IDs") %>%
+  kable_styling(bootstrap_options = "condensed", full_width = F, position = "left")
 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+#### Label sections of the Bible
+
+Nothing complicated here; just adding some context by assigning section names to groups of books. First, `majorSection`, which divides the Old and New Testaments, and identifies the Psalms and Proverbs. Then, `minorSection`, which more finely partitions the Bible into eight sections.
+
+```{r bible_sections, collapse = TRUE, results='asis', fig.height=8}
+# Broad, OT/NT/Ps&P division
+allPossibleCombinations$majorSection <- "New Testament"
+allPossibleCombinations$majorSection[allPossibleCombinations$VID < min(allPossibleCombinations$VID[allPossibleCombinations$Book == "Matt"])] <- "Old Testament"
+allPossibleCombinations$majorSection[allPossibleCombinations$Book == "Ps"] <- "Psalms & Proverbs"
+allPossibleCombinations$majorSection[allPossibleCombinations$Book == "Prov"] <- "Psalms & Proverbs"
+
+# Narrower divisions, following a convention found on openbible.info and elsewhere
+allPossibleCombinations$minorSection <- "Letters"
+allPossibleCombinations$minorSection[allPossibleCombinations$VID < min(allPossibleCombinations$VID[allPossibleCombinations$Book == "Heb"])] <- "Paul"
+allPossibleCombinations$minorSection[allPossibleCombinations$VID < min(allPossibleCombinations$VID[allPossibleCombinations$Book == "Rom"])] <- "Gospels"
+allPossibleCombinations$minorSection[allPossibleCombinations$VID < min(allPossibleCombinations$VID[allPossibleCombinations$Book == "Matt"])] <- "Minor Prophets"
+allPossibleCombinations$minorSection[allPossibleCombinations$VID < min(allPossibleCombinations$VID[allPossibleCombinations$Book == "Hos"])] <- "Major Prophets"
+allPossibleCombinations$minorSection[allPossibleCombinations$VID < min(allPossibleCombinations$VID[allPossibleCombinations$Book == "Isa"])] <- "Poetry & Wisdom"
+allPossibleCombinations$minorSection[allPossibleCombinations$VID < min(allPossibleCombinations$VID[allPossibleCombinations$Book == "Job"])] <- "History"
+allPossibleCombinations$minorSection[allPossibleCombinations$VID < min(allPossibleCombinations$VID[allPossibleCombinations$Book == "Josh"])] <- "Law"
+
+# Get these factors in order
+allPossibleCombinations <- allPossibleCombinations %>%
+  mutate(majorSection = fct_inorder(majorSection),
+         minorSection = fct_inorder(minorSection))
+
+allPossibleCombinations %>%
+  group_by(minorSection) %>%
+  dplyr::summarise(Start = first(Book),
+                   End = last(Book),
+                   nBooks = n_distinct(Book),
+                   nChapters = n_distinct(Book, Chapter),
+                   nVerses = n()) %>%
+  knitr::kable(caption = "First and last book of each section") %>%
+  kable_styling(bootstrap_options = "condensed", full_width = F, position = "left")
+
+# A graphical perspective
+versePercentile <- quantile(allPossibleCombinations$VID, 0:10/10)  # A helper
+
+allPossibleCombinations %>%
+  group_by(minorSection, Book) %>%
+  dplyr::summarise(Start = first(VID),
+                   End = last(VID)) %>%
+  ggplot(.) +
+  aes(y = Start, x = minorSection, colour = minorSection, label = Book) +
+  geom_segment(aes(yend = End, xend = minorSection)) +
+  geom_point() +
+  geom_text(hjust = -1/4, vjust = 1, size = 3) +
+  scale_y_reverse("Verse percentile",
+                  breaks = versePercentile,
+                  label = names(versePercentile),
+                  expand = c(0, 0)) +
+  scale_x_discrete("") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_colour_brewer(guide = "none", palette = "Dark2") +
+  labs(title = "Labeling sections of the Bible")
+# Waiting for hjust to come to ggrepel
+# https://twitter.com/slowkow/status/932688765453299713
+```
+
+#### Creating a verse-to-verse network
+
+Now that we've got the cross-reference data into a friendlier format, we can do what we came here to do: build a network of cross-reference ties between verses.
+
+This section is a little complicated, mainly because references are not solely one-to-one. For example, [Psalm 78:12](https://www.biblegateway.com/passage/?search=Ps.78.12&version=ESV) cites [Exodus chapters 7-12](https://www.biblegateway.com/passage/?search=Exodus+7-+Exodus+12&version=ESV), which constitutes 182 verses. Since the relative relevance of each of those verses is not clear in the data, I treat this case as 182 distinct one-to-one citations, each accorded a `tieWeight` of `1 / 182`, or `r 1 / 182`.
+
+```{r v2v_network, collapse = TRUE, results='asis', fig.height=8}
+separatedRefs <- Refs %>%  # Split multi-verse citations
+  separate(toVerse, into = c("verse1", "verse2"), sep = "-")
+
+verseAdjacency <- separatedRefs %>%  # Make tall
+  mutate(refID = row_number()) %>%
+  gather(placeholder, toVerse, -refID, -fromVerse) %>%
+  na.omit()
+
+veryTallAdjacency <- verseAdjacency %>%  # This takes cross-references
+  left_join(allPossibleCombinations %>%  # from the imported Refs data
+              dplyr::select(toVerse = BCS, Book, Chapter,
+                            listedVID = VID)) %>%
+  left_join(allPossibleCombinations %>%  # Joins each citing verse to all
+              dplyr::select(Book, Chapter, VID)) %>%  # possible verses,
+  group_by(refID) %>%                                 # by book/chapter
+  mutate(startOfRef = min(listedVID),  # Identifies the actual citation range
+         endOfRef = max(listedVID)) %>%
+  ungroup() %>%
+  filter(VID >= startOfRef, VID <= endOfRef) %>%  # And filters out verses
+  mutate(lengthOfRef = 1 + endOfRef - startOfRef)  # outside that range
+
+verseAdjacency <- veryTallAdjacency %>%  # Streamline the above, to include
+  dplyr::select(-toVerse) %>%            # only from- and to- numeric and
+  left_join(allPossibleCombinations %>%  # string identifiers
+              dplyr::select(fromVerse = BCS,
+                            fromID = VID)) %>%
+  left_join(allPossibleCombinations %>%
+              dplyr::select(toVerse = BCS,
+                            VID = VID)) %>%
+  dplyr::select(refID, fromVerse, fromID,
+                toVerse, toID = VID, lengthOfRef) %>%
+  distinct()
+
+numericAdjacency <- verseAdjacency %>%  # Just numeric IDs and tieWeight
+  mutate(tieWeight = 1/lengthOfRef) %>%  # which is the inverse of the length
+  dplyr::select(fromID, toID, tieWeight) %>%  # of the referenced citation
+  na.omit()
+```
+
+The plot below simply draws a point at each (from, to) verse pair. There isn't much to be gleaned here, other than the fact that verses are more likely to refer to more proximate verses than cite across books and sections. The mean distance between citing verse and cited verse (i.e. the number of verses between them) is `r with(numericAdjacency, mean(abs(toID - fromID)))`; the median is `r with(numericAdjacency, median(abs(toID - fromID)))`.
+
+Stephen Smith has a much more engaging, interactive version of this plot [at openbible.info](http://www.openbible.info/labs/cross-references/visualization).
+
+```{r adj_matrix_plot, collapse = TRUE, results='asis', fig.height=8}
+
+sectionAxisLabels <- allPossibleCombinations %>%
+  group_by(label = minorSection) %>%
+  dplyr::summarise(firstVerse = min(VID))
+
+ggplot(numericAdjacency) +
+  aes(x = toID, y = fromID, colour = tieWeight) +
+  geom_point(pch = ".") +
+  coord_equal() +
+  theme_bw() +
+  scale_colour_continuous(guide = "none", low = gray(1), high = gray(0)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_continuous("Cited verse",
+                     breaks = sectionAxisLabels$firstVerse,
+                     labels = sectionAxisLabels$label,
+                     expand = c(0, 0)) +
+  scale_y_reverse("Citing verse",
+                  breaks = sectionAxisLabels$firstVerse,
+                  labels = sectionAxisLabels$label,
+                  expand = c(0, 0)) +
+  labs(title = "Graphical cross-reference adjacency matrix")
+```

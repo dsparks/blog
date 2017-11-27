@@ -20,10 +20,10 @@ tags: []
 lapply(toLoad, library, character.only = TRUE)
 
 # (Package loading messages are suppressed)</code></pre>
-</div>
-<div id="load-data" class="section level2">
-<h2>Load data</h2>
-<p>This cross-reference data comes from <a href="https://www.openbible.info/labs/cross-references/">openbible.info</a>. Stephen Smith, who compiled the data, has produced a lot of really interesting visualizations – I reccommend checking out <a href="http://www.openbible.info/blog/">his blog</a>.</p>
+<div id="load-data" class="section level4">
+<h4>Load data</h4>
+<p>This cross-reference data comes from <a href="https://www.openbible.info/labs/cross-references/">openbible.info</a>. Stephen Smith, who compiled the data, has produced a lot of really interesting visualizations – I highly recommend checking out <a href="http://www.openbible.info/blog/">his blog</a> – so many interesting ideas, and lots of great data.</p>
+<p>Let’s start by loading the data, and renaming the two key variables to omit spaces.</p>
 <pre class="r"><code>setwd(gsub(&quot;content/posts&quot;, &quot;data&quot;, getwd()))
 Refs &lt;- read_tsv(&quot;cross_references.txt&quot;)
 #     Parsed with column specification:
@@ -33,11 +33,14 @@ Refs &lt;- read_tsv(&quot;cross_references.txt&quot;)
 #       Votes = col_integer(),
 #       `#www.openbible.info CC-BY 2017-09-11` = col_character()
 #     )
-#     Warning in rbind(names(probs), probs_f): number of columns of result is not
-#     a multiple of vector length (arg 1)
 #     Warning: 344789 parsing failures.
-#     row # A tibble: 5 x 5 col     row   col  expected    actual                   file expected   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;                  &lt;chr&gt; actual 1     1  &lt;NA&gt; 4 columns 3 columns &#39;cross_references.txt&#39; file 2     2  &lt;NA&gt; 4 columns 3 columns &#39;cross_references.txt&#39; row 3     3  &lt;NA&gt; 4 columns 3 columns &#39;cross_references.txt&#39; col 4     4  &lt;NA&gt; 4 columns 3 columns &#39;cross_references.txt&#39; expected 5     5  &lt;NA&gt; 4 columns 3 columns &#39;cross_references.txt&#39;
-#     ... ................. ... ........................................................ ........ ........................................................ ...... ........................................................ .... ........................................................ ... ........................................................ ... ........................................................ ........ ........................................................
+#     row col  expected    actual                   file
+#       1  -- 4 columns 3 columns &#39;cross_references.txt&#39;
+#       2  -- 4 columns 3 columns &#39;cross_references.txt&#39;
+#       3  -- 4 columns 3 columns &#39;cross_references.txt&#39;
+#       4  -- 4 columns 3 columns &#39;cross_references.txt&#39;
+#       5  -- 4 columns 3 columns &#39;cross_references.txt&#39;
+#     ... ... ......... ......... ......................
 #     See problems(...) for more details.
 
 # Rename columns to omit spaces
@@ -48,8 +51,12 @@ Refs &lt;- Refs %&gt;%
 
 Refs %&gt;%
   sample_n(10) %&gt;%
-  knitr::kable()</code></pre>
-<table>
+  knitr::kable(caption = &quot;A sample of the cross-reference data&quot;) %&gt;%
+  kable_styling(bootstrap_options = &quot;condensed&quot;, full_width = F, position = &quot;left&quot;)</code></pre>
+<table class="table table-condensed" style="width: auto !important; ">
+<caption>
+A sample of the cross-reference data
+</caption>
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -63,85 +70,673 @@ toVerse
 <tbody>
 <tr>
 <td style="text-align:left;">
-Isa.5.12
+Gen.8.1
 </td>
 <td style="text-align:left;">
-Job.21.11-Job.21.14
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ps.79.13
-</td>
-<td style="text-align:left;">
-Ps.100.3
+Hab.3.2
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Rom.1.13
+Judg.1.2
 </td>
 <td style="text-align:left;">
-1Cor.12.1
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-John.1.41
-</td>
-<td style="text-align:left;">
-2Kgs.7.9
+Rev.19.11-Rev.19.16
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-John.5.26
+Luke.9.45
 </td>
 <td style="text-align:left;">
-Col.3.3-Col.3.4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Isa.14.25
-</td>
-<td style="text-align:left;">
-Isa.37.36-Isa.37.38
+2Cor.3.14-2Cor.3.16
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Hab.3.9
+Matt.24.14
 </td>
 <td style="text-align:left;">
-Lam.2.4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Acts.5.32
-</td>
-<td style="text-align:left;">
-John.7.39
+Acts.11.28
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Lam.5.21
+Prov.8.9
 </td>
 <td style="text-align:left;">
-Ps.80.7
+John.7.17
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Job.34.32
+John.5.29
 </td>
 <td style="text-align:left;">
-Eph.4.25-Eph.4.28
+Heb.13.16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Exod.2.10
+</td>
+<td style="text-align:left;">
+1Sam.1.20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Matt.22.44
+</td>
+<td style="text-align:left;">
+Rev.20.11-Rev.20.15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+John.12.1
+</td>
+<td style="text-align:left;">
+John.11.55
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Matt.25.9
+</td>
+<td style="text-align:left;">
+Isa.55.1-Isa.55.3
 </td>
 </tr>
 </tbody>
 </table>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+</div>
+<div id="deduce-all-unique-verses" class="section level4">
+<h4>Deduce all unique verses</h4>
+<p>This <code>Refs</code> <code>tibble</code> contains 344789 cross-reference citations, but they are not all one-to-one; some references are to a short sequence of verses. The next section accomplishes the following:</p>
+<ol style="list-style-type: decimal">
+<li>Since not every verse in the Bible is listed in our <code>Refs</code> data, we can attempt to deduce the entire list of chapter-verses in the Bible. It’s entirely possible the resulting list is incomplete – this code relies on the <code>Refs</code> data to include the <em>actual</em> last verse of each chapter, which may not be the case.</li>
+<li>Use <code>expand.grid</code> to generate all possible book-chapter-verse combinations, and then filter out any chapter and verse numbers that are greater than the maxima we observe in <code>Refs</code>.</li>
+<li>The <code>allPossibleCombinations</code> <code>tibble</code> will be a good place to keep track of things as we progress.</li>
+</ol>
+<pre class="r"><code>allVerses &lt;- Refs %&gt;%  # Split multi-verse citations
+  separate(toVerse, c(&quot;verse1&quot;, &quot;verse2&quot;), sep = &quot;-&quot;) %&gt;%
+  mutate(initialSequence = row_number(),
+         temp = fromVerse) %&gt;%
+  separate(temp, c(&quot;Book&quot;, &quot;Chapter&quot;, &quot;Verse&quot;), sep = &quot;\\.&quot;)
+#     Warning: Too few values at 256640 locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+#     11, 12, 13, 14, 16, 17, 18, 19, 20, 21, ...
+
+bookStart &lt;- allVerses %&gt;%  # Identify the first verse of each book
+  group_by(Book) %&gt;%
+  dplyr::summarise(bookStart = min(initialSequence))%&gt;%
+  ungroup()
+
+allVerses &lt;- allVerses %&gt;%
+  dplyr::select(fromVerse, verse1, verse2) %&gt;%
+  gather(placeholder, verseName) %&gt;%  # Make tall
+  dplyr::select(-placeholder) %&gt;%
+  filter(!is.na(verseName)) %&gt;%
+  mutate(temp = verseName) %&gt;%
+  separate(temp, c(&quot;Book&quot;, &quot;Chapter&quot;, &quot;Verse&quot;), sep = &quot;\\.&quot;) %&gt;%
+  distinct() %&gt;%
+  mutate(Chapter = as.numeric(Chapter),
+         Verse = as.numeric(Verse))
+
+allPossibleCombinations &lt;- with(allVerses,  # Every possible B:C:V combination
+                                expand.grid(Book = unique(Book),
+                                            Chapter = 1:max(Chapter),
+                                            Verse = 1:max(Verse))) %&gt;%
+  dplyr::as_data_frame()
+
+maxChapterByBook &lt;- allVerses %&gt;%  # Observed final chapter of each book
+  group_by(Book) %&gt;%               # (this is probably correct)
+  dplyr::summarise(maxChapter = max(Chapter)) %&gt;%
+  ungroup()
+
+maxVerseByChapter &lt;- allVerses %&gt;%  # Observed final verse of each chapter
+  group_by(Book, Chapter) %&gt;%       # (less confident that this is correct)
+  dplyr::summarise(maxVerse = max(Verse)) %&gt;%
+  ungroup()
+
+allPossibleCombinations &lt;- allPossibleCombinations %&gt;%
+  left_join(maxChapterByBook) %&gt;%
+  left_join(maxVerseByChapter) %&gt;%
+  left_join(bookStart)
+#     Joining, by = &quot;Book&quot;
+#     Warning in left_join_impl(x, y, by$x, by$y, suffix$x, suffix$y): joining
+#     character vector and factor, coercing into character vector
+#     Joining, by = c(&quot;Book&quot;, &quot;Chapter&quot;)
+#     Joining, by = &quot;Book&quot;
+
+allPossibleCombinations &lt;- allPossibleCombinations %&gt;%
+  filter(Chapter &lt;= maxChapter,  # Drop any verses/chapters greater than
+         Verse &lt;= maxVerse)      # actually observed by chapter/book
+
+allPossibleCombinations &lt;- allPossibleCombinations %&gt;%  # Add identifiers
+  arrange(bookStart, Chapter, Verse) %&gt;%
+  mutate(VID = row_number(),
+         BCS = paste(Book, Chapter, Verse, sep = &quot;.&quot;)) %&gt;%
+  dplyr::select(VID, BCS, Book, Chapter, Verse)
+
+allPossibleCombinations %&gt;%
+  sample_n(10) %&gt;%
+  knitr::kable(caption = &quot;A sample of all Book/Chapter/Verses, with numeric and string IDs&quot;) %&gt;%
+  kable_styling(bootstrap_options = &quot;condensed&quot;, full_width = F, position = &quot;left&quot;)</code></pre>
+<table class="table table-condensed" style="width: auto !important; ">
+<caption>
+A sample of all Book/Chapter/Verses, with numeric and string IDs
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+VID
+</th>
+<th style="text-align:left;">
+BCS
+</th>
+<th style="text-align:left;">
+Book
+</th>
+<th style="text-align:right;">
+Chapter
+</th>
+<th style="text-align:right;">
+Verse
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+14850
+</td>
+<td style="text-align:left;">
+Ps.63.10
+</td>
+<td style="text-align:left;">
+Ps
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+24780
+</td>
+<td style="text-align:left;">
+Mark.14.25
+</td>
+<td style="text-align:left;">
+Mark
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7814
+</td>
+<td style="text-align:left;">
+1Sam.23.3
+</td>
+<td style="text-align:left;">
+1Sam
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8297
+</td>
+<td style="text-align:left;">
+2Sam.12.10
+</td>
+<td style="text-align:left;">
+2Sam
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+24781
+</td>
+<td style="text-align:left;">
+Mark.14.26
+</td>
+<td style="text-align:left;">
+Mark
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+27011
+</td>
+<td style="text-align:left;">
+Acts.3.14
+</td>
+<td style="text-align:left;">
+Acts
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+14468
+</td>
+<td style="text-align:left;">
+Ps.37.17
+</td>
+<td style="text-align:left;">
+Ps
+</td>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:right;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19348
+</td>
+<td style="text-align:left;">
+Jer.16.11
+</td>
+<td style="text-align:left;">
+Jer
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+29128
+</td>
+<td style="text-align:left;">
+Gal.3.25
+</td>
+<td style="text-align:left;">
+Gal
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+269
+</td>
+<td style="text-align:left;">
+Gen.11.2
+</td>
+<td style="text-align:left;">
+Gen
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="label-sections-of-the-bible" class="section level4">
+<h4>Label sections of the Bible</h4>
+<p>Nothing complicated here; just adding some context by assigning section names to groups of books. First, <code>majorSection</code>, which divides the Old and New Testaments, and identifies the Psalms and Proverbs. Then, <code>minorSection</code>, which more finely partitions the Bible into eight sections.</p>
+<pre class="r"><code># Broad, OT/NT/Ps&amp;P division
+allPossibleCombinations$majorSection &lt;- &quot;New Testament&quot;
+allPossibleCombinations$majorSection[allPossibleCombinations$VID &lt; min(allPossibleCombinations$VID[allPossibleCombinations$Book == &quot;Matt&quot;])] &lt;- &quot;Old Testament&quot;
+allPossibleCombinations$majorSection[allPossibleCombinations$Book == &quot;Ps&quot;] &lt;- &quot;Psalms &amp; Proverbs&quot;
+allPossibleCombinations$majorSection[allPossibleCombinations$Book == &quot;Prov&quot;] &lt;- &quot;Psalms &amp; Proverbs&quot;
+
+# Narrower divisions, following a convention found on openbible.info and elsewhere
+allPossibleCombinations$minorSection &lt;- &quot;Letters&quot;
+allPossibleCombinations$minorSection[allPossibleCombinations$VID &lt; min(allPossibleCombinations$VID[allPossibleCombinations$Book == &quot;Heb&quot;])] &lt;- &quot;Paul&quot;
+allPossibleCombinations$minorSection[allPossibleCombinations$VID &lt; min(allPossibleCombinations$VID[allPossibleCombinations$Book == &quot;Rom&quot;])] &lt;- &quot;Gospels&quot;
+allPossibleCombinations$minorSection[allPossibleCombinations$VID &lt; min(allPossibleCombinations$VID[allPossibleCombinations$Book == &quot;Matt&quot;])] &lt;- &quot;Minor Prophets&quot;
+allPossibleCombinations$minorSection[allPossibleCombinations$VID &lt; min(allPossibleCombinations$VID[allPossibleCombinations$Book == &quot;Hos&quot;])] &lt;- &quot;Major Prophets&quot;
+allPossibleCombinations$minorSection[allPossibleCombinations$VID &lt; min(allPossibleCombinations$VID[allPossibleCombinations$Book == &quot;Isa&quot;])] &lt;- &quot;Poetry &amp; Wisdom&quot;
+allPossibleCombinations$minorSection[allPossibleCombinations$VID &lt; min(allPossibleCombinations$VID[allPossibleCombinations$Book == &quot;Job&quot;])] &lt;- &quot;History&quot;
+allPossibleCombinations$minorSection[allPossibleCombinations$VID &lt; min(allPossibleCombinations$VID[allPossibleCombinations$Book == &quot;Josh&quot;])] &lt;- &quot;Law&quot;
+
+# Get these factors in order
+allPossibleCombinations &lt;- allPossibleCombinations %&gt;%
+  mutate(majorSection = fct_inorder(majorSection),
+         minorSection = fct_inorder(minorSection))
+
+allPossibleCombinations %&gt;%
+  group_by(minorSection) %&gt;%
+  dplyr::summarise(Start = first(Book),
+                   End = last(Book),
+                   nBooks = n_distinct(Book),
+                   nChapters = n_distinct(Book, Chapter),
+                   nVerses = n()) %&gt;%
+  knitr::kable(caption = &quot;First and last book of each section&quot;) %&gt;%
+  kable_styling(bootstrap_options = &quot;condensed&quot;, full_width = F, position = &quot;left&quot;)</code></pre>
+<table class="table table-condensed" style="width: auto !important; ">
+<caption>
+First and last book of each section
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+minorSection
+</th>
+<th style="text-align:left;">
+Start
+</th>
+<th style="text-align:left;">
+End
+</th>
+<th style="text-align:right;">
+nBooks
+</th>
+<th style="text-align:right;">
+nChapters
+</th>
+<th style="text-align:right;">
+nVerses
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Law
+</td>
+<td style="text-align:left;">
+Gen
+</td>
+<td style="text-align:left;">
+Deut
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+187
+</td>
+<td style="text-align:right;">
+5852
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+History
+</td>
+<td style="text-align:left;">
+Josh
+</td>
+<td style="text-align:left;">
+Esth
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+249
+</td>
+<td style="text-align:right;">
+7018
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Poetry &amp; Wisdom
+</td>
+<td style="text-align:left;">
+Job
+</td>
+<td style="text-align:left;">
+Song
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+243
+</td>
+<td style="text-align:right;">
+4785
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Major Prophets
+</td>
+<td style="text-align:left;">
+Isa
+</td>
+<td style="text-align:left;">
+Dan
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+183
+</td>
+<td style="text-align:right;">
+4440
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Minor Prophets
+</td>
+<td style="text-align:left;">
+Hos
+</td>
+<td style="text-align:left;">
+Mal
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+1050
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gospels
+</td>
+<td style="text-align:left;">
+Matt
+</td>
+<td style="text-align:left;">
+Acts
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+117
+</td>
+<td style="text-align:right;">
+4786
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Paul
+</td>
+<td style="text-align:left;">
+Rom
+</td>
+<td style="text-align:left;">
+Phlm
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+87
+</td>
+<td style="text-align:right;">
+2033
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Letters
+</td>
+<td style="text-align:left;">
+Heb
+</td>
+<td style="text-align:left;">
+Rev
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+1139
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>
+# A graphical perspective
+versePercentile &lt;- quantile(allPossibleCombinations$VID, 0:10/10)  # A helper
+
+allPossibleCombinations %&gt;%
+  group_by(minorSection, Book) %&gt;%
+  dplyr::summarise(Start = first(VID),
+                   End = last(VID)) %&gt;%
+  ggplot(.) +
+  aes(y = Start, x = minorSection, colour = minorSection, label = Book) +
+  geom_segment(aes(yend = End, xend = minorSection)) +
+  geom_point() +
+  geom_text(hjust = -1/4, vjust = 1, size = 3) +
+  scale_y_reverse(&quot;Verse percentile&quot;,
+                  breaks = versePercentile,
+                  label = names(versePercentile),
+                  expand = c(0, 0)) +
+  scale_x_discrete(&quot;&quot;) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_colour_brewer(guide = &quot;none&quot;, palette = &quot;Dark2&quot;) +
+  labs(title = &quot;Labeling sections of the Bible&quot;)</code></pre>
+<p><img src="/posts/2017-11-16-test-markdown-with-new-data_files/figure-html/bible_sections-1.png" width="672" /></p>
+<pre class="r"><code># Waiting for hjust to come to ggrepel
+# https://twitter.com/slowkow/status/932688765453299713</code></pre>
+</div>
+<div id="creating-a-verse-to-verse-network" class="section level4">
+<h4>Creating a verse-to-verse network</h4>
+<p>Now that we’ve got the cross-reference data into a friendlier format, we can do what we came here to do: build a network of cross-reference ties between verses.</p>
+<p>This section is a little complicated, mainly because references are not solely one-to-one. For example, <a href="https://www.biblegateway.com/passage/?search=Ps.78.12&amp;version=ESV">Psalm 78:12</a> cites <a href="https://www.biblegateway.com/passage/?search=Exodus+7-+Exodus+12&amp;version=ESV">Exodus chapters 7-12</a>, which constitutes 182 verses. Since the relative relevance of each of those verses is not clear in the data, I treat this case as 182 distinct one-to-one citations, each accorded a <code>tieWeight</code> of <code>1 / 182</code>, or 0.0054945.</p>
+<pre class="r"><code>separatedRefs &lt;- Refs %&gt;%  # Split multi-verse citations
+  separate(toVerse, into = c(&quot;verse1&quot;, &quot;verse2&quot;), sep = &quot;-&quot;)
+#     Warning: Too few values at 256640 locations: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+#     11, 12, 13, 14, 16, 17, 18, 19, 20, 21, ...
+
+verseAdjacency &lt;- separatedRefs %&gt;%  # Make tall
+  mutate(refID = row_number()) %&gt;%
+  gather(placeholder, toVerse, -refID, -fromVerse) %&gt;%
+  na.omit()
+
+veryTallAdjacency &lt;- verseAdjacency %&gt;%  # This takes cross-references
+  left_join(allPossibleCombinations %&gt;%  # from the imported Refs data
+              dplyr::select(toVerse = BCS, Book, Chapter,
+                            listedVID = VID)) %&gt;%
+  left_join(allPossibleCombinations %&gt;%  # Joins each citing verse to all
+              dplyr::select(Book, Chapter, VID)) %&gt;%  # possible verses,
+  group_by(refID) %&gt;%                                 # by book/chapter
+  mutate(startOfRef = min(listedVID),  # Identifies the actual citation range
+         endOfRef = max(listedVID)) %&gt;%
+  ungroup() %&gt;%
+  filter(VID &gt;= startOfRef, VID &lt;= endOfRef) %&gt;%  # And filters out verses
+  mutate(lengthOfRef = 1 + endOfRef - startOfRef)  # outside that range
+#     Joining, by = &quot;toVerse&quot;
+#     Joining, by = c(&quot;Book&quot;, &quot;Chapter&quot;)
+
+verseAdjacency &lt;- veryTallAdjacency %&gt;%  # Streamline the above, to include
+  dplyr::select(-toVerse) %&gt;%            # only from- and to- numeric and
+  left_join(allPossibleCombinations %&gt;%  # string identifiers
+              dplyr::select(fromVerse = BCS,
+                            fromID = VID)) %&gt;%
+  left_join(allPossibleCombinations %&gt;%
+              dplyr::select(toVerse = BCS,
+                            VID = VID)) %&gt;%
+  dplyr::select(refID, fromVerse, fromID,
+                toVerse, toID = VID, lengthOfRef) %&gt;%
+  distinct()
+#     Joining, by = &quot;fromVerse&quot;
+#     Joining, by = &quot;VID&quot;
+
+numericAdjacency &lt;- verseAdjacency %&gt;%  # Just numeric IDs and tieWeight
+  mutate(tieWeight = 1/lengthOfRef) %&gt;%  # which is the inverse of the length
+  dplyr::select(fromID, toID, tieWeight) %&gt;%  # of the referenced citation
+  na.omit()</code></pre>
+<p>The plot below simply draws a point at each (from, to) verse pair. There isn’t much to be gleaned here, other than the fact that verses are more likely to refer to more proximate verses than cite across books and sections. The mean distance between citing verse and cited verse (i.e. the number of verses between them) is 5916.3541503; the median is 3102.</p>
+<p>Stephen Smith has a much more engaging, interactive version of this plot <a href="http://www.openbible.info/labs/cross-references/visualization">at openbible.info</a>.</p>
+<pre class="r"><code>
+sectionAxisLabels &lt;- allPossibleCombinations %&gt;%
+  group_by(label = minorSection) %&gt;%
+  dplyr::summarise(firstVerse = min(VID))
+
+ggplot(numericAdjacency) +
+  aes(x = toID, y = fromID, colour = tieWeight) +
+  geom_point(pch = &quot;.&quot;) +
+  coord_equal() +
+  theme_bw() +
+  scale_colour_continuous(guide = &quot;none&quot;, low = gray(1), high = gray(0)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_continuous(&quot;Cited verse&quot;,
+                     breaks = sectionAxisLabels$firstVerse,
+                     labels = sectionAxisLabels$label,
+                     expand = c(0, 0)) +
+  scale_y_reverse(&quot;Citing verse&quot;,
+                  breaks = sectionAxisLabels$firstVerse,
+                  labels = sectionAxisLabels$label,
+                  expand = c(0, 0)) +
+  labs(title = &quot;Graphical cross-reference adjacency matrix&quot;)</code></pre>
+<p><img src="/posts/2017-11-16-test-markdown-with-new-data_files/figure-html/adj_matrix_plot-1.png" width="672" /></p>
+</div>
 </div>
