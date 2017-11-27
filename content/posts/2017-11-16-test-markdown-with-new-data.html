@@ -715,7 +715,6 @@ numericAdjacency &lt;- verseAdjacency %&gt;%  # Just numeric IDs and tieWeight
   dplyr::select(fromID, toID, tieWeight) %&gt;%  # of the referenced citation
   na.omit()</code></pre>
 <p>The plot below simply draws a point at each (from, to) verse pair. There isn’t much to be gleaned here, other than the fact that verses are more likely to refer to more proximate verses than cite across books and sections. The mean distance between citing verse and cited verse (i.e. the number of verses between them) is 5916.3541503; the median is 3102. For comparison, the average number of verses between any two randomly-selected distinct verses is about 10368.</p>
-<p>Stephen Smith has a much more engaging, interactive version of this plot <a href="http://www.openbible.info/labs/cross-references/visualization">at openbible.info</a>.</p>
 <pre class="r"><code>
 sectionAxisLabels &lt;- allPossibleCombinations %&gt;%
   group_by(label = minorSection) %&gt;%
@@ -737,6 +736,6 @@ ggplot(numericAdjacency) +
                   labels = sectionAxisLabels$label,
                   expand = c(0, 0)) +
   labs(title = &quot;Graphical cross-reference adjacency matrix&quot;)</code></pre>
-<p><img src="/posts/2017-11-16-test-markdown-with-new-data_files/figure-html/adj_matrix_plot-1.png" width="672" /></p>
+<p><img src="/posts/2017-11-16-test-markdown-with-new-data_files/figure-html/adj_matrix_plot-1.png" width="672" /> Stephen Smith has a much more engaging, interactive version of this plot <a href="http://www.openbible.info/labs/cross-references/visualization">at openbible.info</a>.</p>
 </div>
 </div>
