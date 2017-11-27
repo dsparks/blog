@@ -183,6 +183,7 @@ allPossibleCombinations %>%
                   label = names(versePercentile),
                   expand = c(0, 0)) +
   scale_x_discrete("") +
+  theme_bw() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   scale_colour_brewer(guide = "none", palette = "Dark2") +
   labs(title = "Labeling sections of the Bible")
