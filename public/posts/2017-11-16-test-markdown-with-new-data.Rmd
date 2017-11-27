@@ -15,7 +15,6 @@ knitr::opts_chunk$set(echo = TRUE,
                       cache = TRUE,
                       dev = "CairoPNG",
                       highlight = TRUE)
-##knit_theme$set("solarized-light")
 options(knitr.table.format = "html",
         scipen = 20)
 ```
