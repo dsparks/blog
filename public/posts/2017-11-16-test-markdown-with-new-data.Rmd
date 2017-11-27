@@ -14,7 +14,8 @@ knitr::opts_chunk$set(echo = TRUE,
                       comment = "#    ",
                       cache = TRUE,
                       dev = "CairoPNG")
-options(knitr.table.format = "html") 
+options(knitr.table.format = "html",
+        scipen = 20)
 ```
 
 ## Here is some preamble
