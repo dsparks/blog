@@ -233,7 +233,7 @@ numericAdjacency <- verseAdjacency %>%  # Just numeric IDs and tieWeight
   na.omit()
 ```
 
-The plot below simply draws a point at each (from, to) verse pair. There isn't much to be gleaned here, other than the fact that verses are more likely to refer to more proximate verses than cite across books and sections. The mean distance between citing verse and cited verse (i.e. the number of verses between them) is `r with(numericAdjacency, mean(abs(toID - fromID)))`; the median is `r with(numericAdjacency, median(abs(toID - fromID)))`.
+The plot below simply draws a point at each (from, to) verse pair. There isn't much to be gleaned here, other than the fact that verses are more likely to refer to more proximate verses than cite across books and sections. The mean distance between citing verse and cited verse (i.e. the number of verses between them) is `r with(numericAdjacency, mean(abs(toID - fromID)))`; the median is `r with(numericAdjacency, median(abs(toID - fromID)))`. For comparison, the average number of verses between any two randomly-selected distinct verses is `r nrow(allPossibleCombinations) / 3 + 1/3`
 
 Stephen Smith has a much more engaging, interactive version of this plot [at openbible.info](http://www.openbible.info/labs/cross-references/visualization).
 
